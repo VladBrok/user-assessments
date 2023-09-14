@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent {
   private fb = inject(FormBuilder);
-  isLoading = new Subject<boolean>();
-  authError = new Subject<any>();
+  isLoading = false;
+  authError: any = null;
   loginForm = this.fb.group({
     email: [null, Validators.compose([Validators.required, Validators.email])],
     password: [null, Validators.required],
@@ -32,19 +32,19 @@ export class LoginPageComponent {
       password: this.loginForm.value.password!,
     };
 
-    this.isLoading.next(true);
+    this.isLoading = true;
 
     this.http
       .post(`${env.apiUrl}/login`, body)
-      .pipe(finalize(() => this.isLoading.next(false)))
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
         next: () => {
-          this.authError.next(null);
+          this.authError = null;
           this.router.navigate(['/dashboard']);
         },
         error: (e) => {
           console.error(e);
-          this.authError.next(e);
+          this.authError = e;
         },
       });
   }
