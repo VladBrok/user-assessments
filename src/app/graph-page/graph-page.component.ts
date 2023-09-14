@@ -20,7 +20,18 @@ export class GraphPageComponent {
     responsive: true,
   };
   graphLabels: string[] = ['Agreeableness', 'Drive', 'Luck', 'Openness'];
-  graphDataFormatted: any[] = [{ data: [], label: 'Value' }];
+  graphDataFormatted: any[] = [
+    {
+      data: [],
+      label: 'Value',
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+      ],
+    },
+  ];
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe((params) => {
@@ -37,6 +48,10 @@ export class GraphPageComponent {
         .pipe(finalize(() => (this.isLoading = false)))
         .subscribe({
           next: (result) => {
+            if (!result || typeof result !== 'object') {
+              return;
+            }
+
             this.graphData = result;
             this.graphDataFormatted[0].data = Object.values(
               this.graphData.data
