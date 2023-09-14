@@ -26,6 +26,7 @@ import { ErrorComponent } from './error/error.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { AssessmentsTableComponent } from './assessments-table/assessments-table.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AssessmentsTableComponent } from './assessments-table/assessments-table
     MatIconModule,
     MatTableModule,
     ReactiveFormsModule,
+    NgChartsModule,
   ],
   providers: [
     CookieService,

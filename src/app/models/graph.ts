@@ -1,6 +1,6 @@
 export interface Graph {
   data: GraphData;
-  type: string;
+  type: any;
 }
 
 export interface GraphData {

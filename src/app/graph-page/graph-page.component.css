@@ -1,0 +1,10 @@
+.graph-page__title {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.graph-page__graph-wrapper {
+  padding: 0 50px 140px 50px;
+  display: flex;
+  justify-content: center;
+}
