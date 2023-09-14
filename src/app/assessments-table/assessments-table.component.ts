@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Assessment } from '../models/assessment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assessments-table',
@@ -15,4 +16,10 @@ export class AssessmentsTableComponent {
     'image_url',
   ];
   @Input() assessments: Assessment[] = [];
+
+  constructor(private router: Router) {}
+
+  onRowClick(row: Assessment) {
+    this.router.navigate(['/graph'], { queryParams: { id: row.id } });
+  }
 }

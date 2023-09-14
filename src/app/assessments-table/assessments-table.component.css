@@ -9,3 +9,8 @@
   height: 50px;
   padding: 10px 0;
 }
+
+.assessments-table__row:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
