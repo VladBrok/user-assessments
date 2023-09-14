@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { environment as env } from '../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginRequest } from '../../models/login-request';
-import { Subject, finalize } from 'rxjs';
+import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,22 +20,20 @@ export class LoginPageComponent {
     password: [null, Validators.required],
   });
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   onSubmit(): void {
     if (!this.loginForm.valid) {
       return;
     }
 
-    const body: LoginRequest = {
-      email: this.loginForm.value.email!,
-      password: this.loginForm.value.password!,
-    };
-
     this.isLoading = true;
 
-    this.http
-      .post(`${env.apiUrl}/login`, body)
+    this.auth
+      .login({
+        email: this.loginForm.value.email!,
+        password: this.loginForm.value.password!,
+      })
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
         next: () => {
