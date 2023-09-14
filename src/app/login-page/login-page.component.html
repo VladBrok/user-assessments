@@ -37,7 +37,18 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit">Login</button>
+        <button
+          mat-raised-button
+          type="submit"
+          [disabled]="isLoading | async"
+          color="primary"
+        >
+          <mat-spinner
+            *ngIf="isLoading | async; else notLoading"
+            diameter="25"
+          ></mat-spinner>
+          <ng-template #notLoading>Login</ng-template>
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>

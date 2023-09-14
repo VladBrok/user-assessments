@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment as env } from '../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
+import { LoginRequest } from '../../models/login-request';
+import { Subject, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -10,6 +12,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginPageComponent {
   private fb = inject(FormBuilder);
+  isLoading = new Subject<boolean>();
   loginForm = this.fb.group({
     email: [null, Validators.compose([Validators.required, Validators.email])],
     password: [null, Validators.required],
@@ -18,12 +21,23 @@ export class LoginPageComponent {
   constructor(private http: HttpClient) {}
 
   onSubmit(): void {
-    console.log(environment.apiUrl);
-
     if (!this.loginForm.valid) {
       return;
     }
 
-    console.log('submit');
+    const body: LoginRequest = {
+      email: this.loginForm.value.email!,
+      password: this.loginForm.value.password!,
+    };
+
+    this.isLoading.next(true);
+
+    this.http
+      .post(`${env.apiUrl}/login`, body)
+      .pipe(finalize(() => this.isLoading.next(false)))
+      .subscribe({
+        next: () => console.log('next'),
+        error: (e) => console.log('error', e),
+      });
   }
 }
