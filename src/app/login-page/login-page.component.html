@@ -1,2 +1,44 @@
-<mat-slide-toggle>Toggle me!</mat-slide-toggle>
-<p>login-page works!</p>
+<div class="login-page__container">
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="login-page__card" [class.mat-elevation-z8]>
+      <mat-card-header>
+        <mat-card-title class="login-page__title">Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="login-page__row">
+          <mat-form-field class="login-page__full-width">
+            <input
+              matInput
+              placeholder="Email *"
+              formControlName="email"
+              type="email"
+            />
+            <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
+              Please enter a valid email
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="login-page__row">
+          <mat-form-field class="login-page__full-width">
+            <input
+              matInput
+              placeholder="Password *"
+              formControlName="password"
+            />
+            <mat-error
+              *ngIf="loginForm.controls['password'].hasError('required')"
+            >
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
