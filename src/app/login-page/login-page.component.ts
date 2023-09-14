@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-
+import { environment } from '../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -14,11 +15,15 @@ export class LoginPageComponent {
     password: [null, Validators.required],
   });
 
+  constructor(private http: HttpClient) {}
+
   onSubmit(): void {
+    console.log(environment.apiUrl);
+
     if (!this.loginForm.valid) {
       return;
     }
 
-    console.log('Thanks!');
+    console.log('submit');
   }
 }

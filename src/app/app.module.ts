@@ -8,7 +8,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { GraphPageComponent } from './graph-page/graph-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HttpClientModule } from '@angular/common/http';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
