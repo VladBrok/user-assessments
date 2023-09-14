@@ -1,4 +1,6 @@
 <div>
+  <h1 class="mat-headline-2 admin-page__title">Users</h1>
+
   <app-loading *ngIf="isLoading; else loaded"></app-loading>
   <ng-template #loaded>
     <div *ngIf="loadingError?.error; else success">
