@@ -1,1 +1,12 @@
-<p>admin-page works!</p>
+<div>
+  <app-loading *ngIf="isLoading; else loaded"></app-loading>
+  <ng-template #loaded>
+    <div *ngIf="loadingError?.error; else success">
+      <app-error
+        text="Failed to load users. Please try again later"
+      ></app-error>
+    </div>
+
+    <ng-template #success> users...</ng-template>
+  </ng-template>
+</div>

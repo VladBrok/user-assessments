@@ -8,7 +8,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { GraphPageComponent } from './graph-page/graph-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
@@ -20,6 +20,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CookieService } from 'ngx-cookie-service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { LoadingComponent } from './loading/loading.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AdminPageComponent,
     GraphPageComponent,
     NavbarComponent,
+    LoadingComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatIconModule,
     ReactiveFormsModule,
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

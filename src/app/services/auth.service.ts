@@ -50,6 +50,10 @@ export class AuthService {
       : null;
   }
 
+  getToken() {
+    return this.cookieService.get('token');
+  }
+
   private setCookie(key: string, value: string) {
     this.cookieService.set(
       key,
