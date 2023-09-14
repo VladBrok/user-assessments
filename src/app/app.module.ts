@@ -25,6 +25,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { ErrorComponent } from './error/error.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { MatTableModule } from '@angular/material/table';
+import { AssessmentsTableComponent } from './assessments-table/assessments-table.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatTableModule } from '@angular/material/table';
     LoadingComponent,
     ErrorComponent,
     UsersTableComponent,
+    AssessmentsTableComponent,
   ],
   imports: [
     BrowserModule,

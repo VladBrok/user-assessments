@@ -1,1 +1,20 @@
-<p>dashboard-page works!</p>
+<div>
+  <h1 class="mat-headline-2 dashboard-page__title">Assessments</h1>
+
+  <app-loading *ngIf="isLoading; else loaded"></app-loading>
+  <ng-template #loaded>
+    <div *ngIf="loadingError?.error; else success">
+      <app-error
+        text="Failed to load assessments. Please try again later"
+      ></app-error>
+    </div>
+
+    <ng-template #success>
+      <div class="dashboard-page__table-wrapper">
+        <app-assessments-table
+          [assessments]="assessments"
+        ></app-assessments-table>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>
