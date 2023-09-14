@@ -1,3 +1,5 @@
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0-modified | 20110126
    License: none (public domain)
@@ -442,4 +444,13 @@ textarea {
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

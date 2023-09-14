@@ -7,6 +7,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { GraphPageComponent } from './graph-page/graph-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -14,13 +17,15 @@ import { GraphPageComponent } from './graph-page/graph-page.component';
     LoginPageComponent,
     DashboardPageComponent,
     AdminPageComponent,
-    GraphPageComponent
+    GraphPageComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
