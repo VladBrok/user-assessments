@@ -40,6 +40,8 @@ export class GraphPageComponent {
         return;
       }
 
+      this.isLoading = true;
+
       this.http
         .get<Graph>(`${env.apiUrl}/userassessments/graph`, {
           params: new HttpParams().set('id', this.assessmentId),
