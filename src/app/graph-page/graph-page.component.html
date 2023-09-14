@@ -10,7 +10,17 @@
     </div>
 
     <ng-template #success>
-      <div>graph...</div>
+      <div *ngIf="graphData" class="graph-page__graph-wrapper">
+        <canvas
+          baseChart
+          [datasets]="graphDataFormatted"
+          [labels]="graphLabels"
+          [options]="graphOptions"
+          [legend]="true"
+          [type]="graphData.type"
+        >
+        </canvas>
+      </div>
     </ng-template>
   </ng-template>
 </div>

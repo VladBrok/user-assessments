@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment as env } from '../../environments/environment';
 import { finalize } from 'rxjs';
 import { Graph } from '../models/graph';
+// import { ChartOptions, ChartType, ChartDataSets } from 'ng2-charts';
 
 @Component({
   selector: 'app-graph-page',
@@ -15,6 +16,11 @@ export class GraphPageComponent {
   isLoading = false;
   graphData: Graph | null = null;
   loadingError: any = null;
+  graphOptions = {
+    responsive: true,
+  };
+  graphLabels: string[] = ['Agreeableness', 'Drive', 'Luck', 'Openness'];
+  graphDataFormatted: any[] = [{ data: [], label: 'Value' }];
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe((params) => {
@@ -32,6 +38,9 @@ export class GraphPageComponent {
         .subscribe({
           next: (result) => {
             this.graphData = result;
+            this.graphDataFormatted[0].data = Object.values(
+              this.graphData.data
+            );
             this.loadingError = null;
           },
           error: (e) => {
