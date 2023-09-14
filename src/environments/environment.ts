@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://user-assessment-api.vercel.app',
+  apiUrl: 'https://user-assessment-api.vercel.app/api',
 };
