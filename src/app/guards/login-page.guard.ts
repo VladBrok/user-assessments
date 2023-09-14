@@ -5,5 +5,8 @@ import { AuthService } from '../services/auth.service';
 export const loginPageGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const auth = inject(AuthService);
-  return auth.isLoggedIn() && router.navigate(['/dashboard']);
+  if (auth.isLoggedIn()) {
+    router.navigate(['/dashboard']);
+  }
+  return true;
 };

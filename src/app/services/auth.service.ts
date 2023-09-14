@@ -42,6 +42,14 @@ export class AuthService {
     return this.cookieService.get('role') === 'Admin';
   }
 
+  getFullName() {
+    return this.isLoggedIn()
+      ? this.cookieService.get('first_name') +
+          ' ' +
+          this.cookieService.get('last_name')
+      : null;
+  }
+
   private setCookie(key: string, value: string) {
     this.cookieService.set(
       key,
