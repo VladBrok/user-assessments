@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { environment as env } from '../../environments/environment';
 import { finalize } from 'rxjs';
 import { Graph } from '../models/graph';
-// import { ChartOptions, ChartType, ChartDataSets } from 'ng2-charts';
 
 @Component({
   selector: 'app-graph-page',
