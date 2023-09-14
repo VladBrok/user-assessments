@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { finalize } from 'rxjs';
-import { User } from '../../models/user';
+import { User } from '../models/user';
 import { environment as env } from '../../environments/environment';
 
 @Component({
@@ -11,7 +11,7 @@ import { environment as env } from '../../environments/environment';
 })
 export class AdminPageComponent {
   isLoading = false;
-  users: User[] = []; // TODO: handle empty state
+  users: User[] = [];
   loadingError: any = null;
 
   constructor(private http: HttpClient) {
@@ -21,7 +21,8 @@ export class AdminPageComponent {
       .get<User[]>(`${env.apiUrl}/users`)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: () => {
+        next: (result) => {
+          this.users = result;
           this.loadingError = null;
         },
         error: (e) => {

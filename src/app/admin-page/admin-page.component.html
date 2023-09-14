@@ -7,6 +7,10 @@
       ></app-error>
     </div>
 
-    <ng-template #success> users...</ng-template>
+    <ng-template #success>
+      <div class="admin-page__table-wrapper">
+        <app-users-table [users]="users"></app-users-table>
+      </div>
+    </ng-template>
   </ng-template>
 </div>

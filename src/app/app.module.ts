@@ -23,6 +23,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoadingComponent } from './loading/loading.component';
 import { ErrorComponent } from './error/error.component';
+import { UsersTableComponent } from './users-table/users-table.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { ErrorComponent } from './error/error.component';
     NavbarComponent,
     LoadingComponent,
     ErrorComponent,
+    UsersTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { ErrorComponent } from './error/error.component';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatIconModule,
+    MatTableModule,
     ReactiveFormsModule,
   ],
   providers: [

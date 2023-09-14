@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { environment as env } from '../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LoginRequest } from '../../models/login-request';
+import { LoginRequest } from '../models/login-request';
 import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
