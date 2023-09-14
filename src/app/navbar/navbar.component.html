@@ -1,0 +1,33 @@
+<mat-toolbar color="primary" class="navbar__container">
+  <div class="navbar__nav-items">
+    <a
+      mat-stroked-button
+      [routerLink]="['/dashboard']"
+      [routerLinkActive]="['navbar__nav-item--active']"
+      >Dashboard</a
+    >
+    <a
+      *ngIf="auth.isAdmin()"
+      mat-stroked-button
+      [routerLink]="['/admin']"
+      [routerLinkActive]="['navbar__nav-item--active']"
+      >Admin</a
+    >
+  </div>
+  <span class="navbar__spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <div class="navbar__menu">
+      <div>
+        {{ auth.getFullName() }}
+      </div>
+      <div>
+        <button (click)="logout()" mat-raised-button type="submit" color="warn">
+          Logout
+        </button>
+      </div>
+    </div>
+  </mat-menu>
+</mat-toolbar>

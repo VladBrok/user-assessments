@@ -1,0 +1,24 @@
+.navbar__spacer {
+  flex: 1 1 auto;
+}
+
+.navbar__menu {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px;
+  gap: 15px;
+}
+
+.navbar__nav-item--active {
+  --mdc-outlined-button-outline-color: #fff;
+}
+
+.navbar__nav-items {
+  display: flex;
+  gap: 20px;
+  margin-left: 10px;
+}
+
+.navbar__container {
+  position: fixed;
+}
