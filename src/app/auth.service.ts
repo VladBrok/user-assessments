@@ -5,17 +5,12 @@ import { environment as env } from '../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { map } from 'rxjs';
 import { LoginResponse } from '../models/login-response';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private http: HttpClient,
-    private cookieService: CookieService,
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   login(data: LoginRequest) {
     return this.http.post<LoginResponse>(`${env.apiUrl}/login`, data).pipe(
@@ -33,7 +28,6 @@ export class AuthService {
     this.cookieService.delete('role');
     this.cookieService.delete('first_name');
     this.cookieService.delete('last_name');
-    this.router.navigate(['/login']);
   }
 
   isLoggedIn() {
