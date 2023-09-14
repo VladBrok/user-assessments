@@ -4,12 +4,28 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { GraphPageComponent } from './graph-page/graph-page.component';
+import { loginPageGuard } from './guards/login-page.guard';
+import { adminGuard } from './guards/admin.guard';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginPageComponent },
-  { path: 'dashboard', component: DashboardPageComponent },
-  { path: 'admin', component: AdminPageComponent },
-  { path: 'graph', component: GraphPageComponent },
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent,
+    canActivate: [loginPageGuard],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardPageComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'admin', component: AdminPageComponent, canActivate: [adminGuard] },
+  { path: 'graph', component: GraphPageComponent, canActivate: [authGuard] },
 ];
 
 @NgModule({

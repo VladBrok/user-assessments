@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LoginRequest } from '../../models/login-request';
 import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
