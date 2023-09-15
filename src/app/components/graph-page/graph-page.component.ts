@@ -11,7 +11,7 @@ import { Graph } from '../../models/graph';
   styleUrls: ['./graph-page.component.scss'],
 })
 export class GraphPageComponent {
-  assessmentId: string = '';
+  assessmentId = '';
   isLoading = false;
   graphData: Graph | null = null;
   loadingError: any = null;
