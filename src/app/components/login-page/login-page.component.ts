@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
+import { Subscription, finalize } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth/auth.service';
 
@@ -9,7 +9,7 @@ import { AuthService } from '../../core/services/auth/auth.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnDestroy {
   private fb = inject(FormBuilder);
   isLoading = false;
   authError: any = null;
@@ -17,6 +17,7 @@ export class LoginPageComponent {
     email: [null, Validators.compose([Validators.required, Validators.email])],
     password: [null, Validators.required],
   });
+  authSub!: Subscription;
 
   constructor(private router: Router, private auth: AuthService) {}
 
@@ -27,7 +28,7 @@ export class LoginPageComponent {
 
     this.isLoading = true;
 
-    this.auth
+    this.authSub = this.auth
       .login({
         email: this.loginForm.value.email || '',
         password: this.loginForm.value.password || '',
@@ -43,5 +44,9 @@ export class LoginPageComponent {
           this.authError = e;
         },
       });
+  }
+
+  ngOnDestroy(): void {
+    this.authSub.unsubscribe();
   }
 }

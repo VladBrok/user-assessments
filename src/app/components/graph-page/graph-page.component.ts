@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { finalize } from 'rxjs';
+import { Subscription, finalize } from 'rxjs';
 import { Graph } from '../../core/models/graph';
 import { GraphService } from '../../core/services/graph/graph.service';
 
@@ -9,7 +9,7 @@ import { GraphService } from '../../core/services/graph/graph.service';
   templateUrl: './graph-page.component.html',
   styleUrls: ['./graph-page.component.scss'],
 })
-export class GraphPageComponent implements OnInit {
+export class GraphPageComponent implements OnInit, OnDestroy {
   assessmentId = '';
   isLoading = false;
   graphData: Graph | null = null;
@@ -30,6 +30,7 @@ export class GraphPageComponent implements OnInit {
       ],
     },
   ];
+  graphSub!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +46,7 @@ export class GraphPageComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.graphService
+    this.graphSub = this.graphService
       .getGraph(this.assessmentId)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
@@ -63,5 +64,9 @@ export class GraphPageComponent implements OnInit {
           this.loadingError = e;
         },
       });
+  }
+
+  ngOnDestroy(): void {
+    this.graphSub.unsubscribe();
   }
 }
