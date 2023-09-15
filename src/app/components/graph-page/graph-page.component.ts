@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment as env } from '../../../environments/environment';
 import { finalize } from 'rxjs';
-import { Graph } from '../../models/graph';
+import { Graph } from '../../core/models/graph';
 
 @Component({
   selector: 'app-graph-page',

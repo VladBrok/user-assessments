@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { finalize } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
-import { Assessment } from '../../models/assessment';
+import { Assessment } from '../../core/models/assessment';
 
 @Component({
   selector: 'app-dashboard-page',

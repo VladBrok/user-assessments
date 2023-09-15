@@ -4,7 +4,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { GraphPageComponent } from './components/graph-page/graph-page.component';
-import { authGuard } from './guards/auth.guard';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {

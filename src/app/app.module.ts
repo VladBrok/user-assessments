@@ -20,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CookieService } from 'ngx-cookie-service';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ErrorComponent } from './components/error/error.component';
 import { UsersTableComponent } from './components/users-table/users-table.component';
