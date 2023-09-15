@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Input } from '@angular/core';
 import { User } from '../../core/models/user';
 
@@ -7,7 +8,9 @@ import { User } from '../../core/models/user';
   styleUrls: ['./users-table.component.scss'],
 })
 export class UsersTableComponent {
-  displayedColumns: (keyof User)[] = [
+  selection = new SelectionModel<User>(true, []);
+  displayedColumns: (keyof User | 'select')[] = [
+    'select',
     'name',
     'lastName',
     'dateOfBirth',
@@ -16,4 +19,16 @@ export class UsersTableComponent {
     'position',
   ];
   @Input() users: User[] = [];
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.users.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.users.forEach((row) => this.selection.select(row));
+  }
 }

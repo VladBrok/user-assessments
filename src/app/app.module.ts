@@ -14,6 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -48,6 +49,7 @@ import { NgChartsModule } from 'ng2-charts';
     BrowserAnimationsModule,
     MatSlideToggleModule,
     MatInputModule,
+    MatCheckboxModule,
     MatMenuModule,
     MatButtonModule,
     MatCardModule,
