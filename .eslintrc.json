@@ -3,6 +3,14 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "project": [
+      "./tsconfig.json"
+    ],
+    "sourceType": "module"
+  },
   "overrides": [
     {
       "files": [
@@ -12,9 +20,11 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:rxjs/recommended"
       ],
       "rules": {
+        "rxjs/no-implicit-any-catch": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {

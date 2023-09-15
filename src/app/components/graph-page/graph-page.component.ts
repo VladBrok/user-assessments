@@ -33,37 +33,33 @@ export class GraphPageComponent {
   ];
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.route.queryParams.subscribe((params) => {
-      this.assessmentId = params['id'];
+    this.assessmentId = this.route.snapshot.queryParams['id'];
 
-      if (!this.assessmentId) {
-        return;
-      }
+    if (!this.assessmentId) {
+      return;
+    }
 
-      this.isLoading = true;
+    this.isLoading = true;
 
-      this.http
-        .get<Graph>(`${env.apiUrl}/userassessments/graph`, {
-          params: new HttpParams().set('id', this.assessmentId),
-        })
-        .pipe(finalize(() => (this.isLoading = false)))
-        .subscribe({
-          next: (result) => {
-            if (!result || typeof result !== 'object') {
-              return;
-            }
+    this.http
+      .get<Graph>(`${env.apiUrl}/userassessments/graph`, {
+        params: new HttpParams().set('id', this.assessmentId),
+      })
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
+        next: (result) => {
+          if (!result || typeof result !== 'object') {
+            return;
+          }
 
-            this.graphData = result;
-            this.graphDataFormatted[0].data = Object.values(
-              this.graphData.data
-            );
-            this.loadingError = null;
-          },
-          error: (e) => {
-            console.error(e);
-            this.loadingError = e;
-          },
-        });
-    });
+          this.graphData = result;
+          this.graphDataFormatted[0].data = Object.values(this.graphData.data);
+          this.loadingError = null;
+        },
+        error: (e) => {
+          console.error(e);
+          this.loadingError = e;
+        },
+      });
   }
 }
