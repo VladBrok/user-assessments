@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs';
 import { User } from '../../core/models/user';
 import { environment as env } from '../../../environments/environment';
@@ -9,12 +9,14 @@ import { environment as env } from '../../../environments/environment';
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
 })
-export class AdminPageComponent {
+export class AdminPageComponent implements OnInit {
   isLoading = false;
   users: User[] = [];
   loadingError: any = null;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
     this.isLoading = true;
 
     this.http

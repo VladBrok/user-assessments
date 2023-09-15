@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment as env } from '../../../environments/environment';
 import { finalize } from 'rxjs';
@@ -10,7 +10,7 @@ import { Graph } from '../../core/models/graph';
   templateUrl: './graph-page.component.html',
   styleUrls: ['./graph-page.component.scss'],
 })
-export class GraphPageComponent {
+export class GraphPageComponent implements OnInit {
   assessmentId = '';
   isLoading = false;
   graphData: Graph | null = null;
@@ -32,7 +32,9 @@ export class GraphPageComponent {
     },
   ];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+
+  ngOnInit(): void {
     this.assessmentId = this.route.snapshot.queryParams['id'];
 
     if (!this.assessmentId) {

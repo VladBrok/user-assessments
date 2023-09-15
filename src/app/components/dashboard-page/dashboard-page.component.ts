@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { finalize } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
@@ -9,12 +9,14 @@ import { Assessment } from '../../core/models/assessment';
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss'],
 })
-export class DashboardPageComponent {
+export class DashboardPageComponent implements OnInit {
   isLoading = false;
   assessments: Assessment[] = [];
   loadingError: any = null;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
     this.isLoading = true;
 
     this.http
