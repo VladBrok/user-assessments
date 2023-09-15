@@ -10,7 +10,7 @@
     </div>
 
     <ng-template #success>
-      <div *ngIf="graphData" class="graph-page__graph-wrapper">
+      <div *ngIf="graphData; else empty" class="graph-page__graph-wrapper">
         <canvas
           baseChart
           [datasets]="graphDataFormatted"
@@ -21,6 +21,9 @@
         >
         </canvas>
       </div>
+      <ng-template #empty>
+        <p class="graph-page__empty">No data</p>
+      </ng-template>
     </ng-template>
   </ng-template>
 </div>
