@@ -1,9 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { environment as env } from '../../../environments/environment';
 import { finalize } from 'rxjs';
 import { Graph } from '../../core/models/graph';
+import { GraphService } from '../../core/services/graph/graph.service';
 
 @Component({
   selector: 'app-graph-page',
@@ -32,7 +31,10 @@ export class GraphPageComponent implements OnInit {
     },
   ];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private readonly graphService: GraphService
+  ) {}
 
   ngOnInit(): void {
     this.assessmentId = this.route.snapshot.queryParams['id'];
@@ -43,10 +45,8 @@ export class GraphPageComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.http
-      .get<Graph>(`${env.apiUrl}/userassessments/graph`, {
-        params: new HttpParams().set('id', this.assessmentId),
-      })
+    this.graphService
+      .getGraph(this.assessmentId)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
         next: (result) => {

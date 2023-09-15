@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs';
 import { User } from '../../core/models/user';
-import { environment as env } from '../../../environments/environment';
+import { UserService } from '../../core/services/user/user.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -14,13 +13,13 @@ export class AdminPageComponent implements OnInit {
   users: User[] = [];
   loadingError: any = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly userService: UserService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
 
-    this.http
-      .get<User[]>(`${env.apiUrl}/users`)
+    this.userService
+      .getUsers()
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
         next: (result) => {

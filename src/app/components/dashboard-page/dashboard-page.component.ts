@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { finalize } from 'rxjs';
-import { environment as env } from '../../../environments/environment';
 import { Assessment } from '../../core/models/assessment';
+import { AssessmentService } from '../../core/services/assessment/assessment.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -14,13 +13,13 @@ export class DashboardPageComponent implements OnInit {
   assessments: Assessment[] = [];
   loadingError: any = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly assessmentService: AssessmentService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
 
-    this.http
-      .get<Assessment[]>(`${env.apiUrl}/userassessments`)
+    this.assessmentService
+      .getAssessments()
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
         next: (result) => {
