@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
-import { GraphPageComponent } from './graph-page/graph-page.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { GraphPageComponent } from './components/graph-page/graph-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -19,13 +19,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CookieService } from 'ngx-cookie-service';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { LoadingComponent } from './loading/loading.component';
-import { ErrorComponent } from './error/error.component';
-import { UsersTableComponent } from './users-table/users-table.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { ErrorComponent } from './components/error/error.component';
+import { UsersTableComponent } from './components/users-table/users-table.component';
 import { MatTableModule } from '@angular/material/table';
-import { AssessmentsTableComponent } from './assessments-table/assessments-table.component';
+import { AssessmentsTableComponent } from './components/assessments-table/assessments-table.component';
 import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({

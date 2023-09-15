@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
-import { GraphPageComponent } from './graph-page/graph-page.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { GraphPageComponent } from './components/graph-page/graph-page.component';
 import { loginPageGuard } from './guards/login-page.guard';
 import { adminGuard } from './guards/admin.guard';
 import { authGuard } from './guards/auth.guard';
