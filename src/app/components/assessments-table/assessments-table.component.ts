@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-assessments-table',
   templateUrl: './assessments-table.component.html',
-  styleUrls: ['./assessments-table.component.css'],
+  styleUrls: ['./assessments-table.component.scss'],
 })
 export class AssessmentsTableComponent {
   displayedColumns: (keyof Assessment)[] = [
