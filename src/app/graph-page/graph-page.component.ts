@@ -5,8 +5,6 @@ import { environment as env } from '../../environments/environment';
 import { finalize } from 'rxjs';
 import { Graph } from '../models/graph';
 
-// TODO: handle case when graph with id not found
-
 @Component({
   selector: 'app-graph-page',
   templateUrl: './graph-page.component.html',
