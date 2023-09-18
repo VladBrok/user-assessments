@@ -1,23 +1,27 @@
 <div>
   <h1 class="graph-page__title">Graph of assessment No. {{ assessmentId }}</h1>
 
-  <app-loading *ngIf="isLoading; else loaded"></app-loading>
+  <app-loading *ngIf="isLoading$ | async; else loaded"></app-loading>
+
   <ng-template #loaded>
-    <div *ngIf="loadingError?.error; else success">
+    <div *ngIf="loadingError$ | async; else success">
       <app-error
         text="Failed to load graph data. Please try again later"
       ></app-error>
     </div>
 
     <ng-template #success>
-      <div *ngIf="graphData; else empty" class="graph-page__graph-wrapper">
+      <div
+        *ngIf="displayData$ | async as graph; else empty"
+        class="graph-page__graph-wrapper"
+      >
         <canvas
           baseChart
-          [datasets]="graphDataFormatted"
-          [labels]="graphLabels"
-          [options]="graphOptions"
+          [datasets]="[graph.dataset]"
+          [labels]="graph.labels"
+          [options]="graph.options"
           [legend]="true"
-          [type]="graphData.type"
+          [type]="graph.graph.type"
         >
         </canvas>
       </div>

@@ -7,7 +7,7 @@ import { AssessmentService } from '../../services/assessment/assessment.service'
 
 @Injectable()
 export class AssessmentEffects {
-  getUsers$ = createEffect(() => {
+  getAssessments$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AssessmentActions.getAssessments),
       exhaustMap(() =>

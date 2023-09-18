@@ -39,6 +39,11 @@ import {
   assessmentsReducer,
 } from './core/store/assessment/assessment.reducer';
 import { AssessmentEffects } from './core/store/assessment/assessment.effects';
+import { GraphEffects } from './core/store/graph/graph.effects';
+import {
+  graphFeatureKey,
+  graphReducer,
+} from './core/store/graph/graph.reducer';
 
 @NgModule({
   declarations: [
@@ -74,8 +79,14 @@ import { AssessmentEffects } from './core/store/assessment/assessment.effects';
       [authFeatureKey]: authReducer,
       [userFeatureKey]: usersReducer,
       [assessmentFeatureKey]: assessmentsReducer,
+      [graphFeatureKey]: graphReducer,
     }),
-    EffectsModule.forRoot(AuthEffects, UserEffects, AssessmentEffects),
+    EffectsModule.forRoot(
+      AuthEffects,
+      UserEffects,
+      AssessmentEffects,
+      GraphEffects
+    ),
   ],
   providers: [
     CookieService,
