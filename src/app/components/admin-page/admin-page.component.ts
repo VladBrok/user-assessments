@@ -1,40 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, finalize } from 'rxjs';
-import { User } from '../../core/models/user';
-import { UserService } from '../../core/services/user/user.service';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import {
+  selectAreUsersLoading,
+  selectGetUsersError,
+  selectUsers,
+} from '../../core/store/user/user.selectors';
+import { getUsers } from '../../core/store/user/user.actions';
 
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
 })
-export class AdminPageComponent implements OnInit, OnDestroy {
-  isLoading = false;
-  users: User[] = [];
-  loadingError: any = null;
-  usersSub!: Subscription;
+export class AdminPageComponent implements OnInit {
+  isLoading$ = this.store.select(selectAreUsersLoading);
+  users$ = this.store.select(selectUsers);
+  loadingError$ = this.store.select(selectGetUsersError);
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-
-    this.usersSub = this.userService
-      .getUsers()
-      .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe({
-        next: (result) => {
-          this.users = result;
-          this.loadingError = null;
-        },
-        error: (e) => {
-          console.error(e);
-          this.loadingError = e;
-        },
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.usersSub.unsubscribe();
+    this.store.dispatch(getUsers());
   }
 }

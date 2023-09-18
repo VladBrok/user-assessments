@@ -1,41 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, finalize } from 'rxjs';
-import { Graph } from '../../core/models/graph';
-import { GraphService } from '../../core/services/graph/graph.service';
+import { Store } from '@ngrx/store';
+import {
+  selectGetGraphError,
+  selectGraphDisplayData,
+  selectIsGraphLoading,
+} from '../../core/store/graph/graph.selectors';
+import { getGraph } from '../../core/store/graph/graph.actions';
 
 @Component({
   selector: 'app-graph-page',
   templateUrl: './graph-page.component.html',
   styleUrls: ['./graph-page.component.scss'],
 })
-export class GraphPageComponent implements OnInit, OnDestroy {
+export class GraphPageComponent implements OnInit {
   assessmentId = '';
-  isLoading = false;
-  graphData: Graph | null = null;
-  loadingError: any = null;
-  graphOptions = {
-    responsive: true,
-  };
-  graphLabels: string[] = ['Agreeableness', 'Drive', 'Luck', 'Openness'];
-  graphDataFormatted: any[] = [
-    {
-      data: [],
-      label: 'Value',
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.7)',
-        'rgba(54, 162, 235, 0.7)',
-        'rgba(255, 206, 86, 0.7)',
-        'rgba(75, 192, 192, 0.7)',
-      ],
-    },
-  ];
-  graphSub!: Subscription;
+  isLoading$ = this.store.select(selectIsGraphLoading);
+  loadingError$ = this.store.select(selectGetGraphError);
+  displayData$ = this.store.select(selectGraphDisplayData);
 
-  constructor(
-    private route: ActivatedRoute,
-    private readonly graphService: GraphService
-  ) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.assessmentId = this.route.snapshot.queryParams['id'];
@@ -44,29 +28,6 @@ export class GraphPageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.isLoading = true;
-
-    this.graphSub = this.graphService
-      .getGraph(this.assessmentId)
-      .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe({
-        next: (result) => {
-          if (!result || typeof result !== 'object') {
-            return;
-          }
-
-          this.graphData = result;
-          this.graphDataFormatted[0].data = Object.values(this.graphData.data);
-          this.loadingError = null;
-        },
-        error: (e) => {
-          console.error(e);
-          this.loadingError = e;
-        },
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.graphSub.unsubscribe();
+    this.store.dispatch(getGraph({ id: this.assessmentId }));
   }
 }

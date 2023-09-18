@@ -28,6 +28,22 @@ import { UsersTableComponent } from './components/users-table/users-table.compon
 import { MatTableModule } from '@angular/material/table';
 import { AssessmentsTableComponent } from './components/assessments-table/assessments-table.component';
 import { NgChartsModule } from 'ng2-charts';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { authFeatureKey, authReducer } from './core/store/auth/auth.reducer';
+import { AuthEffects } from './core/store/auth/auth.effects';
+import { UserEffects } from './core/store/user/user.effects';
+import { userFeatureKey, usersReducer } from './core/store/user/user.reducer';
+import {
+  assessmentFeatureKey,
+  assessmentsReducer,
+} from './core/store/assessment/assessment.reducer';
+import { AssessmentEffects } from './core/store/assessment/assessment.effects';
+import { GraphEffects } from './core/store/graph/graph.effects';
+import {
+  graphFeatureKey,
+  graphReducer,
+} from './core/store/graph/graph.reducer';
 
 @NgModule({
   declarations: [
@@ -59,6 +75,18 @@ import { NgChartsModule } from 'ng2-charts';
     MatTableModule,
     ReactiveFormsModule,
     NgChartsModule,
+    StoreModule.forRoot({
+      [authFeatureKey]: authReducer,
+      [userFeatureKey]: usersReducer,
+      [assessmentFeatureKey]: assessmentsReducer,
+      [graphFeatureKey]: graphReducer,
+    }),
+    EffectsModule.forRoot(
+      AuthEffects,
+      UserEffects,
+      AssessmentEffects,
+      GraphEffects
+    ),
   ],
   providers: [
     CookieService,

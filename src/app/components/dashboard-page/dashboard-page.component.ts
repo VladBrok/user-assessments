@@ -1,40 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, finalize } from 'rxjs';
-import { Assessment } from '../../core/models/assessment';
-import { AssessmentService } from '../../core/services/assessment/assessment.service';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import {
+  selectAreAssessmentsLoading,
+  selectAssessments,
+  selectGetAssessmentsError,
+} from '../../core/store/assessment/assessment.selectors';
+import { getAssessments } from '../../core/store/assessment/assessment.actions';
 
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss'],
 })
-export class DashboardPageComponent implements OnInit, OnDestroy {
-  isLoading = false;
-  assessments: Assessment[] = [];
-  loadingError: any = null;
-  assessmentSub!: Subscription;
+export class DashboardPageComponent implements OnInit {
+  isLoading$ = this.store.select(selectAreAssessmentsLoading);
+  assessments$ = this.store.select(selectAssessments);
+  loadingError$ = this.store.select(selectGetAssessmentsError);
 
-  constructor(private readonly assessmentService: AssessmentService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-
-    this.assessmentSub = this.assessmentService
-      .getAssessments()
-      .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe({
-        next: (result) => {
-          this.assessments = result;
-          this.loadingError = null;
-        },
-        error: (e) => {
-          console.error(e);
-          this.loadingError = e;
-        },
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.assessmentSub.unsubscribe();
+    this.store.dispatch(getAssessments());
   }
 }
