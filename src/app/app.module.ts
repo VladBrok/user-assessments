@@ -28,6 +28,8 @@ import { UsersTableComponent } from './components/users-table/users-table.compon
 import { MatTableModule } from '@angular/material/table';
 import { AssessmentsTableComponent } from './components/assessments-table/assessments-table.component';
 import { NgChartsModule } from 'ng2-charts';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { NgChartsModule } from 'ng2-charts';
     MatTableModule,
     ReactiveFormsModule,
     NgChartsModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     CookieService,
