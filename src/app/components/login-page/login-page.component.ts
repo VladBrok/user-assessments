@@ -13,9 +13,10 @@ import {
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  private fb = inject(FormBuilder);
   isLoading$ = this.store.select(selectIsAuthLoading);
   authError$ = this.store.select(selectAuthError);
+
+  private fb = inject(FormBuilder);
   loginForm = this.fb.group({
     email: [null, Validators.compose([Validators.required, Validators.email])],
     password: [null, Validators.required],

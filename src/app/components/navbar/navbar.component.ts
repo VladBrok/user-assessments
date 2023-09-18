@@ -9,7 +9,6 @@ import { logout } from '../../core/store/auth/auth.actions';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  // TODO: communicate via store only (remove dependency from AuthService) ?
   constructor(public auth: AuthService, private store: Store) {}
 
   logout() {
