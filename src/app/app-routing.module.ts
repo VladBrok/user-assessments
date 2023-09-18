@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
-import { GraphPageComponent } from './graph-page/graph-page.component';
-import { loginPageGuard } from './guards/login-page.guard';
-import { adminGuard } from './guards/admin.guard';
-import { authGuard } from './guards/auth.guard';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { GraphPageComponent } from './components/graph-page/graph-page.component';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,14 +15,18 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent,
-    canActivate: [loginPageGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'dashboard',
     component: DashboardPageComponent,
     canActivate: [authGuard],
   },
-  { path: 'admin', component: AdminPageComponent, canActivate: [adminGuard] },
+  {
+    path: 'admin',
+    component: AdminPageComponent,
+    canActivate: [authGuard],
+  },
   { path: 'graph', component: GraphPageComponent, canActivate: [authGuard] },
 ];
 
