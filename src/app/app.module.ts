@@ -30,6 +30,8 @@ import { AssessmentsTableComponent } from './components/assessments-table/assess
 import { NgChartsModule } from 'ng2-charts';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { authFeatureKey, authReducer } from './core/store/auth/auth.reducer';
+import { AuthEffects } from './core/store/auth/auth.effects';
 
 @NgModule({
   declarations: [
@@ -61,8 +63,8 @@ import { EffectsModule } from '@ngrx/effects';
     MatTableModule,
     ReactiveFormsModule,
     NgChartsModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({ [authFeatureKey]: authReducer }),
+    EffectsModule.forRoot(AuthEffects),
   ],
   providers: [
     CookieService,
