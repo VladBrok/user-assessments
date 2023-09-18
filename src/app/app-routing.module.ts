@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './components/login-page/login-page.component';
-import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
-import { GraphPageComponent } from './components/graph-page/graph-page.component';
 import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
@@ -14,20 +10,30 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginPageComponent,
+    loadChildren: () =>
+      import('./core/modules/login/login.module').then((m) => m.LoginModule),
     canActivate: [authGuard],
   },
   {
     path: 'dashboard',
-    component: DashboardPageComponent,
+    loadChildren: () =>
+      import('./core/modules/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
     canActivate: [authGuard],
   },
   {
     path: 'admin',
-    component: AdminPageComponent,
+    loadChildren: () =>
+      import('./core/modules/admin/admin.module').then((m) => m.AdminModule),
     canActivate: [authGuard],
   },
-  { path: 'graph', component: GraphPageComponent, canActivate: [authGuard] },
+  {
+    path: 'graph',
+    loadChildren: () =>
+      import('./core/modules/graph/graph.module').then((m) => m.GraphModule),
+    canActivate: [authGuard],
+  },
 ];
 
 @NgModule({
