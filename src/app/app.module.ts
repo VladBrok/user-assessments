@@ -34,6 +34,11 @@ import { authFeatureKey, authReducer } from './core/store/auth/auth.reducer';
 import { AuthEffects } from './core/store/auth/auth.effects';
 import { UserEffects } from './core/store/user/user.effects';
 import { userFeatureKey, usersReducer } from './core/store/user/user.reducer';
+import {
+  assessmentFeatureKey,
+  assessmentsReducer,
+} from './core/store/assessment/assessment.reducer';
+import { AssessmentEffects } from './core/store/assessment/assessment.effects';
 
 @NgModule({
   declarations: [
@@ -68,8 +73,9 @@ import { userFeatureKey, usersReducer } from './core/store/user/user.reducer';
     StoreModule.forRoot({
       [authFeatureKey]: authReducer,
       [userFeatureKey]: usersReducer,
+      [assessmentFeatureKey]: assessmentsReducer,
     }),
-    EffectsModule.forRoot(AuthEffects, UserEffects),
+    EffectsModule.forRoot(AuthEffects, UserEffects, AssessmentEffects),
   ],
   providers: [
     CookieService,
