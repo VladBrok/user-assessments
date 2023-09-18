@@ -3,12 +3,12 @@ import { AuthState, authFeatureKey } from './auth.reducer';
 
 export const selectAuthState = createFeatureSelector<AuthState>(authFeatureKey);
 
-export const selectIsLoading = createSelector(
+export const selectIsAuthLoading = createSelector(
   selectAuthState,
   (state) => state.isLoading
 );
 
-export const selectError = createSelector(
+export const selectAuthError = createSelector(
   selectAuthState,
   (state) => state.error
 );

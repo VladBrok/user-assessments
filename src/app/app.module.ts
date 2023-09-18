@@ -32,6 +32,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authFeatureKey, authReducer } from './core/store/auth/auth.reducer';
 import { AuthEffects } from './core/store/auth/auth.effects';
+import { UserEffects } from './core/store/user/user.effects';
+import { userFeatureKey, usersReducer } from './core/store/user/user.reducer';
 
 @NgModule({
   declarations: [
@@ -63,8 +65,11 @@ import { AuthEffects } from './core/store/auth/auth.effects';
     MatTableModule,
     ReactiveFormsModule,
     NgChartsModule,
-    StoreModule.forRoot({ [authFeatureKey]: authReducer }),
-    EffectsModule.forRoot(AuthEffects),
+    StoreModule.forRoot({
+      [authFeatureKey]: authReducer,
+      [userFeatureKey]: usersReducer,
+    }),
+    EffectsModule.forRoot(AuthEffects, UserEffects),
   ],
   providers: [
     CookieService,

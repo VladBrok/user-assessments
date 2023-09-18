@@ -1,16 +1,16 @@
 <div>
   <h1 class="mat-headline-2 admin-page__title">Users</h1>
 
-  <app-loading *ngIf="isLoading; else loaded"></app-loading>
+  <app-loading *ngIf="isLoading$ | async; else loaded"></app-loading>
   <ng-template #loaded>
-    <div *ngIf="loadingError?.error; else success">
+    <div *ngIf="loadingError$ | async; else success">
       <app-error
         text="Failed to load users. Please try again later"
       ></app-error>
     </div>
 
     <ng-template #success>
-      <div class="admin-page__table-wrapper">
+      <div class="admin-page__table-wrapper" *ngIf="users$ | async as users">
         <app-users-table [users]="users"></app-users-table>
       </div>
     </ng-template>

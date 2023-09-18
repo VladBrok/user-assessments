@@ -3,8 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { login } from '../../core/store/auth/auth.actions';
 import {
-  selectError,
-  selectIsLoading,
+  selectAuthError,
+  selectIsAuthLoading,
 } from '../../core/store/auth/auth.selectors';
 
 @Component({
@@ -14,8 +14,8 @@ import {
 })
 export class LoginPageComponent {
   private fb = inject(FormBuilder);
-  isLoading$ = this.store.select(selectIsLoading);
-  authError$ = this.store.select(selectError);
+  isLoading$ = this.store.select(selectIsAuthLoading);
+  authError$ = this.store.select(selectAuthError);
   loginForm = this.fb.group({
     email: [null, Validators.compose([Validators.required, Validators.email])],
     password: [null, Validators.required],
