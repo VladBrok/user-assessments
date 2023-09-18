@@ -59,7 +59,10 @@
       ],
       "extends": [
         "plugin:@ngrx/recommended-requiring-type-checking"
-      ]
+      ],
+      "rules": {
+        "@ngrx/prefer-inline-action-props": "off"
+      }
     }
   ]
 }
