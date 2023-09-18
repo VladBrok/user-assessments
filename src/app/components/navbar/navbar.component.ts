@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../core/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { logout } from '../../core/store/auth/auth.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor(public auth: AuthService, private router: Router) {}
+  // TODO: communicate via store only (remove dependency from AuthService) ?
+  constructor(public auth: AuthService, private store: Store) {}
 
   logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
+    this.store.dispatch(logout());
   }
 }
